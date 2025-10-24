@@ -1,0 +1,18 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    // 画像アップロードのルール
+    match /images/{imageId} {
+      // 誰でも画像をアップロードできる
+      allow create: if request.resource.size < 5 * 1024 * 1024  // 5MB以下
+                    && request.resource.contentType.matches('image/.*');  // 画像ファイルのみ
+
+      // 誰でも画像を読み取れる
+      allow read: if true;
+
+      // 更新と削除は禁止
+      allow update: if false;
+      allow delete: if false;
+    }
+  }
+}

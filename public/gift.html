@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ギフトを開封 - あけマ</title>
+    <meta name="description" content="あなたへのギフトが届いています">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="gift-page">
+    <div class="container">
+        <!-- ローディング表示 -->
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>ギフトを読み込み中...</p>
+        </div>
+
+        <!-- エラー表示 -->
+        <div class="error hidden" id="error">
+            <h2>😢 エラー</h2>
+            <p class="error-message"></p>
+            <a href="/" class="btn btn-primary">トップページへ</a>
+        </div>
+
+        <!-- スクラッチカード -->
+        <div class="scratch-container hidden" id="scratchContainer">
+            <h2 class="gift-title">🎁 ギフトが届いています</h2>
+            <p class="instruction">画面を指でこすって開封してください</p>
+
+            <div class="canvas-wrapper">
+                <canvas id="scratchCanvas"></canvas>
+                <div id="giftContent" class="gift-content">
+                    <!-- ここにギフトの中身が表示される -->
+                </div>
+            </div>
+
+            <div class="scratch-progress">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <p class="progress-text" id="progressText">0%</p>
+            </div>
+
+            <div class="hint" id="hint">
+                💡 ヒント: 画面をこすって剥がしてみてください
+            </div>
+        </div>
+
+        <!-- 開封完了 -->
+        <div class="opened-container hidden" id="openedContainer">
+            <h2>🎉 ギフトを開封しました！</h2>
+            <div id="finalContent" class="final-content">
+                <!-- ここに最終的なギフトの中身が表示される -->
+            </div>
+            <div class="action-buttons">
+                <a href="/" class="btn btn-primary">あなたもギフトを作る</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="/__/firebase/9.0.0/firebase-app-compat.js"></script>
+    <script src="/__/firebase/9.0.0/firebase-firestore-compat.js"></script>
+    <script src="/__/firebase/9.0.0/firebase-storage-compat.js"></script>
+
+    <!-- アプリケーションスクリプト -->
+    <script src="/js/scratch.js"></script>
+</body>
+</html>

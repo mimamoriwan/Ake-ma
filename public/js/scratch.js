@@ -1,3 +1,8 @@
+// Firebase参照
+const db = firebase.firestore();
+const storage = firebase.storage();
+const GIFTS_COLLECTION = 'gifts';
+
 // スクラッチカード機能
 
 // DOM要素

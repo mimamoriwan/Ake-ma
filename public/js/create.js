@@ -1,3 +1,8 @@
+// Firebase参照
+const db = firebase.firestore();
+const storage = firebase.storage();
+const GIFTS_COLLECTION = 'gifts';
+
 // ギフト作成ページのロジック
 
 // 状態管理

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>あけマ - デジタルギフトをラッピング</title>
+    <meta name="description" content="デジタルコンテンツに「開封のワクワク感」をプラスするサービス">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎁 あけマ</h1>
+            <p class="tagline">デジタルギフトに、開封のワクワクを</p>
+        </header>
+
+        <main class="create-gift">
+            <h2>ギフトを作る</h2>
+
+            <!-- ステップ1: 種別選択 -->
+            <div class="step" id="step1">
+                <h3>1. 何を送りますか?</h3>
+                <div class="gift-type-selector">
+                    <button class="type-btn" data-type="text">
+                        <span class="icon">📝</span>
+                        <span class="label">テキスト</span>
+                    </button>
+                    <button class="type-btn" data-type="image">
+                        <span class="icon">🖼️</span>
+                        <span class="label">画像</span>
+                    </button>
+                    <button class="type-btn" data-type="url">
+                        <span class="icon">🔗</span>
+                        <span class="label">URL</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- ステップ2: 内容入力 -->
+            <div class="step hidden" id="step2">
+                <h3>2. 中身を入力してください</h3>
+
+                <!-- テキスト入力 -->
+                <div class="input-area hidden" id="input-text">
+                    <textarea
+                        id="textContent"
+                        placeholder="例: 今度ご飯おごるよ！&#10;例: 肩たたき券（1回分）"
+                        rows="6"
+                        maxlength="500"></textarea>
+                    <small class="char-count">0 / 500文字</small>
+                </div>
+
+                <!-- 画像アップロード -->
+                <div class="input-area hidden" id="input-image">
+                    <div class="upload-box" id="uploadBox">
+                        <input type="file" id="imageFile" accept="image/*" hidden>
+                        <label for="imageFile" class="upload-label">
+                            <span class="icon">📷</span>
+                            <span>画像をアップロード</span>
+                            <small>クリックまたはドラッグ&amp;ドロップ</small>
+                        </label>
+                    </div>
+                    <div class="image-preview hidden" id="imagePreview">
+                        <img id="previewImg" alt="Preview">
+                        <button class="btn-remove" id="removeImage">✕</button>
+                    </div>
+                </div>
+
+                <!-- URL入力 -->
+                <div class="input-area hidden" id="input-url">
+                    <input
+                        type="url"
+                        id="urlContent"
+                        placeholder="https://example.com"
+                        pattern="https?://.+">
+                    <small>例: ZoomのURL、イベントページ、Googleフォームなど</small>
+                </div>
+
+                <div class="button-group">
+                    <button class="btn btn-secondary" id="btnBack">戻る</button>
+                    <button class="btn btn-primary" id="btnWrap" disabled>ラッピングする</button>
+                </div>
+            </div>
+
+            <!-- ステップ3: URL生成完了 -->
+            <div class="step hidden" id="step3">
+                <h3>✨ ギフトが完成しました！</h3>
+                <div class="result-box">
+                    <p>以下のURLを相手に送ってください：</p>
+                    <div class="url-display">
+                        <input type="text" id="giftUrl" readonly>
+                        <button class="btn-copy" id="btnCopy">コピー</button>
+                    </div>
+                    <div class="share-buttons">
+                        <button class="btn btn-line" id="btnShareLine">LINEで送る</button>
+                        <button class="btn btn-mail" id="btnShareMail">メールで送る</button>
+                    </div>
+                </div>
+                <button class="btn btn-secondary" id="btnCreateNew">新しいギフトを作る</button>
+            </div>
+
+            <!-- ローディング表示 -->
+            <div class="loading hidden" id="loading">
+                <div class="spinner"></div>
+                <p>ギフトを作成中...</p>
+            </div>
+
+            <!-- エラー表示 -->
+            <div class="error hidden" id="error">
+                <p class="error-message"></p>
+                <button class="btn btn-secondary" id="btnDismissError">閉じる</button>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 あけマ - ギフトに開封体験を</p>
+        </footer>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage-compat.js"></script>
+
+    <!-- アプリケーションスクリプト -->
+    <script src="/js/firebase-config.js"></script>
+    <script src="/js/create.js"></script>
+</body>
+</html>

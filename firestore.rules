@@ -1,0 +1,31 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // ギフトコレクションのルール
+    match /gifts/{giftId} {
+      // 誰でもギフトを作成できる（書き込み）
+      allow create: if request.resource.data.keys().hasAll(['type', 'createdAt', 'opened'])
+                    && request.resource.data.type in ['text', 'image', 'url']
+                    && request.resource.data.opened == false
+                    // テキストの場合
+                    && (request.resource.data.type != 'text' ||
+                        (request.resource.data.keys().hasAll(['content']) &&
+                         request.resource.data.content is string &&
+                         request.resource.data.content.size() > 0 &&
+                         request.resource.data.content.size() <= 500))
+                    // 画像の場合
+                    && (request.resource.data.type != 'image' ||
+                        request.resource.data.keys().hasAll(['imageUrl']))
+                    // URLの場合
+                    && (request.resource.data.type != 'url' ||
+                        request.resource.data.keys().hasAll(['url']));
+
+      // 誰でもギフトを読み取れる
+      allow read: if true;
+
+      // 更新と削除は禁止（将来的に開封状態の更新などを検討）
+      allow update: if false;
+      allow delete: if false;
+    }
+  }
+}

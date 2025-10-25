@@ -2,6 +2,7 @@
 .firebase/
 firebase-debug.log
 firestore-debug.log
+public/js/firebase-config.js
 
 # Node.js
 node_modules/

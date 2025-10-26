@@ -54,13 +54,13 @@ async function loadGift() {
 
         // ギフトの中身を表示
         displayGiftContent();
-
-        // スクラッチカードを初期化
-        initScratchCard();
-
+        
         // ローディングを非表示、スクラッチ画面を表示
         elements.loading.classList.add('hidden');
         elements.scratchContainer.classList.remove('hidden');
+
+        // スクラッチカードを初期化
+        initScratchCard();
 
     } catch (error) {
         console.error('Error loading gift:', error);

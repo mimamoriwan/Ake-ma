@@ -227,6 +227,7 @@ input:focus {
     cursor: pointer;
     transition: all 0.3s;
     flex: 1;
+    white-space: nowrap;
 }
 
 .btn-primary {
